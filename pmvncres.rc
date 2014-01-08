@@ -1,0 +1,211 @@
+/*
+ * pmvncres.rc - PM VNC Viewer, Resources
+ *
+ * Version by Alex Taylor http://www.cs-club.org/~alex/os2/utils/index.html
+ */
+
+#include <os2.h>
+#include "pmvncres.h"
+
+ICON    ID_PMVNC    .\src\vncview.ico
+POINTER ID_CURSOR   .\src\pmvnc.ptr
+
+/*
+ * Session Dialog
+ */
+
+DLGTEMPLATE IDD_SESS
+BEGIN
+    DIALOG  "PM VNC Viewer - connect to", 0, 0, 0, 186, 52, ,
+                        FCF_SYSMENU | FCF_TITLEBAR | FCF_DLGBORDER
+    BEGIN
+        ICON            ID_PMVNC,                                   -1          5,   32, 20,  16
+        LTEXT           "VNC Server:",                              -1,         32,  37, 49,  8,   DT_VCENTER
+                        PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+        COMBOBOX        "",                                         IDD_SHOST,  81,  0,  100, 46,  CBS_DROPDOWN
+                        PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+        LTEXT           "host:display",                             -1,         81,  27, 60, 8
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00808080L
+                        PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+        LTEXT           "e.g. snoopy:2",                            -1,         81,  19, 64, 8
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00808080L
+                        PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+        DEFPUSHBUTTON   "Co~nnect",                                 DID_OK,         5,   3,  50, 12
+                        PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+        PUSHBUTTON      "~Cancel",                                  DID_CANCEL, 57,  3,  50, 12
+                        PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+        PUSHBUTTON      "~Options...",                              IDD_SOPTS,  109, 3, 50, 12
+                        PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    END
+END
+
+/*
+ * Option Dialog
+ */
+
+DLGTEMPLATE IDD_OPTS_INI
+BEGIN
+    DIALOG  "", 0, 0, 0, 163, 78, , FCF_TITLEBAR | FCF_DLGBORDER
+            PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    BEGIN
+        LTEXT           "Pixel Format:",            -1,                 5,   64,  70,  8,   DT_VCENTER
+        COMBOBOX        "32bits",                   IDD_OPT_FORMAT,     76,  22,  82,  52,  CBS_DROPDOWNLIST
+        LTEXT           "Preferred Encoding:",      -1,                 5,   52,  70,  8,   DT_VCENTER
+        COMBOBOX        "Hextile",                  IDD_OPT_ENCODE,     76,  9,   82,  52,  CBS_DROPDOWNLIST
+        AUTOCHECKBOX    "Request shared session",   IDD_OPT_SHARED,     5,   39,  114, 10
+        AUTOCHECKBOX    "View only",                IDD_OPT_VONLY,      5,   29,  114, 10
+        AUTOCHECKBOX    "Deiconify on Bell",        IDD_OPT_DEICON,     5,   19,  114, 10
+        DEFPUSHBUTTON   "Co~nnect",                 DID_OK,             5,   3,   50,  12
+        PUSHBUTTON      "~Done",                    DID_CANCEL,         57,  3,   50,  12
+    END
+END
+
+DLGTEMPLATE IDD_OPTS_MOD
+BEGIN
+    DIALOG  "", 0, 0, 0, 163, 78, , FCF_TITLEBAR | FCF_DLGBORDER
+            PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    BEGIN
+        LTEXT           "Pixel Format:",            -1,                 5,   64,  70,  8,   DT_VCENTER
+        COMBOBOX        "32bits",                   IDD_OPT_FORMAT,     76,  22,  82,  52,  CBS_DROPDOWNLIST
+        LTEXT           "Preferred Encoding:",      -1,                 5,   52,  70,  8,   DT_VCENTER
+        COMBOBOX        "Hextile",                  IDD_OPT_ENCODE,     76,  9,   82,  52,  CBS_DROPDOWNLIST
+        AUTOCHECKBOX    "Request shared session",   IDD_OPT_SHARED,     5,   39,  114, 10
+        AUTOCHECKBOX    "View only",                IDD_OPT_VONLY,      5,   29,  114, 10
+        AUTOCHECKBOX    "Deiconify on Bell",        IDD_OPT_DEICON,     5,   19,  114, 10
+        DEFPUSHBUTTON   "~OK",                      DID_OK,             5,   3,   50,  12
+        PUSHBUTTON      "~Cancel",                  DID_CANCEL,         57,  3,   50,  12
+    END
+END
+
+/*
+ * Password Dialog
+ */
+
+DLGTEMPLATE IDD_PASS
+BEGIN
+    DIALOG "PM VNC Viewer - authentication", 0, 0, 0, 180, 37, , FCF_TITLEBAR | FCF_DLGBORDER
+            PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    BEGIN
+        ICON            ID_PMVNC,                   -1,                 5,   19,  20,  16
+        LTEXT           "Session password:",        -1,                 33,  22,  70,  8,   DT_VCENTER
+        ENTRYFIELD      "",                         IDD_PEDIT,          107, 23,  66,  7,   ES_LEFT | ES_MARGIN | ES_UNREADABLE
+        DEFPUSHBUTTON   "~OK",                      DID_OK,             5,   3,   50,  12
+        PUSHBUTTON      "~Cancel",                  DID_CANCEL,         57,  3,   50,  12
+    END
+END
+
+/*
+ * Menu append to SysMenu
+ */
+
+MENU    IDM_MENU
+BEGIN
+    MENUITEM    SEPARATOR
+    MENUITEM    "Connection ~options...\tAlt-O",    IDM_OPTIONS
+    MENUITEM    "Connection ~info\tAlt-I",          IDM_CONNINF
+    MENUITEM    "Request screen ~refresh\tAlt-R",   IDM_REFRESH
+    MENUITEM    SEPARATOR
+    MENUITEM    "Cop~y\tAlt-Y",                     IDM_COPY
+    MENUITEM    "~Paste\tAlt-P",                    IDM_PASTE
+    MENUITEM    SEPARATOR
+    SUBMENU     "Send ~Control Key\tAlt-C Toggle",  IDM_CTL
+    BEGIN
+        MENUITEM    "Ctrl Key ~Toggle",             IDM_CTLTGL
+        MENUITEM    "Ctrl Key ~Down",               IDM_CTLDN
+        MENUITEM    "Ctrl Key ~Up",                 IDM_CTLUP
+    END
+    SUBMENU     "Send ~Alt Key\tAlt-A Toggle",      IDM_ALT
+    BEGIN
+        MENUITEM    "Alt Key ~Toggle",              IDM_ALTTGL
+        MENUITEM    "Alt Key ~Down",                IDM_ALTDN
+        MENUITEM    "Alt Key ~Up",                  IDM_ALTUP
+    END
+    SUBMENU     "Send ~Function Key",               IDM_FUNC
+    BEGIN
+        MENUITEM    "F1",                           IDM_FUNC01
+        MENUITEM    "F2",                           IDM_FUNC02
+        MENUITEM    "F3",                           IDM_FUNC03
+        MENUITEM    "F4",                           IDM_FUNC04
+        MENUITEM    "F5",                           IDM_FUNC05
+        MENUITEM    "F6",                           IDM_FUNC06
+        MENUITEM    "F7",                           IDM_FUNC07
+        MENUITEM    "F8",                           IDM_FUNC08
+        MENUITEM    "F9",                           IDM_FUNC09
+        MENUITEM    "F10",                          IDM_FUNC10
+        MENUITEM    "F11",                          IDM_FUNC11
+        MENUITEM    "F12",                          IDM_FUNC12
+    END
+    MENUITEM    SEPARATOR
+    MENUITEM    "Send C-A-~D\tAlt-D",               IDM_C_A_D
+    MENUITEM    "Send Ctrl-~Esc\tAlt-E",            IDM_CTLESC
+    MENUITEM    "Send Alt-TAB\tAlt-T",              IDM_ALTTAB
+    MENUITEM    SEPARATOR
+    MENUITEM    "A~bout VNC Viewer...\tAlt-B",      IDM_ABOUT
+END
+
+/*
+ * Accelarator
+ */
+
+ACCELTABLE  ID_PMVNC
+BEGIN
+    "a",    IDM_ALTTGL,     CHAR, ALT
+    "b",    IDM_ABOUT,      CHAR, ALT
+    "c",    IDM_CTLTGL,     CHAR, ALT
+    "d",    IDM_C_A_D,      CHAR, ALT
+    "e",    IDM_CTLESC,     CHAR, ALT
+    "i",    IDM_CONNINF,    CHAR, ALT
+    "o",    IDM_OPTIONS,    CHAR, ALT
+    "p",    IDM_PASTE,      CHAR, ALT
+    "r",    IDM_REFRESH,    CHAR, ALT
+    "t",    IDM_ALTTAB,     CHAR, ALT
+    "y",    IDM_COPY,       CHAR, ALT
+END
+
+/*
+ * PopupMenu for Modal Key State
+ */
+
+MENU    IDM_KEYST
+BEGIN
+    MENUITEM    "Key ~Toggle",  IDM_KEYTGL
+    MENUITEM    "Key ~Down",    IDM_KEYDN
+    MENUITEM    "Key ~Up",      IDM_KEYUP
+END
+
+/*
+ * Message Dialog
+ */
+
+DLGTEMPLATE IDD_MESG
+BEGIN
+    DIALOG  "", 0, 0, 0, 243, 77, , FCF_TITLEBAR | FCF_DLGBORDER
+            PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    BEGIN
+        ICON            ID_PMVNC,                   -1,                 5,   56,  20,  16
+        MLE             "",                         IDD_MTEXT,          32,  19,  209, 55,  MLS_READONLY | MLS_IGNORETAB | MLS_VSCROLL | MLS_WORDWRAP
+                        PRESPARAMS PP_BACKGROUNDCOLOR, 0x00CCCCCCL
+        DEFPUSHBUTTON   "~OK",                      DID_OK,             32,  3,   40,  12
+    END
+END
+
+/*
+ * About Dialog
+ *
+ * Add Dmitry Steklenev change, missing comma after ID_PMVNC
+ * in IDD_ABOUT
+ */
+
+DLGTEMPLATE IDD_ABOUT
+BEGIN
+    DIALOG  "About", -1, 46, 66, 219, 56, , FCF_TITLEBAR | FCF_DLGBORDER
+    PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans.Bold"
+    BEGIN
+        PUSHBUTTON      "OK", DID_OK, 92, 4, 40, 14
+        ICON            ID_PMVNC,  -1, 6, 25, 0, 0
+        CTEXT           "PM VNC Viewer 1.04 for OS/2 and eComstation", -1,
+                        37, 36, 170, 14, DT_VCENTER
+        CTEXT           "Open Watcom 1.8 Version - May 2009", -1,
+                        37, 28, 170, 8, DT_VCENTER
+    END
+END
